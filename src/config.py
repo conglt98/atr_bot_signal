@@ -221,20 +221,16 @@ ENABLE_SIGNAL_LOGGING: bool = True
 # ============================================================================
 
 # Telegram bot token from BotFather
-# Load from environment variable or use default (for backward compatibility)
+# Load from environment variable
 # IMPORTANT: Set TELEGRAM_BOT_TOKEN in .env file for production
-TELEGRAM_BOT_TOKEN: str = os.getenv(
-    "TELEGRAM_BOT_TOKEN",
-    "xxx"  # Default for backward compatibility
-)
+# SECURITY: Never commit real tokens to Git!
+TELEGRAM_BOT_TOKEN: str = os.getenv("TELEGRAM_BOT_TOKEN", "")
 
 # Telegram chat ID to send notifications to
 # Get it from: https://api.telegram.org/bot<TOKEN>/getUpdates
 # IMPORTANT: Set TELEGRAM_CHAT_ID in .env file for production
-TELEGRAM_CHAT_ID: str = os.getenv(
-    "TELEGRAM_CHAT_ID",
-    "yyy"  # Default for backward compatibility
-)
+# SECURITY: Never commit real chat IDs to Git!
+TELEGRAM_CHAT_ID: str = os.getenv("TELEGRAM_CHAT_ID", "")
 
 # Enable Telegram notifications
 # Set to True to receive notifications when bot starts and when signals are detected

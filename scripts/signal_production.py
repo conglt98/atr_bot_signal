@@ -16,12 +16,23 @@ strategies. You can run this in a loop or schedule it to run periodically
 """
 
 import sys
+import os
 from pathlib import Path
 
 # Add project root to path for imports
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 sys.path.insert(0, str(project_root / "src"))
+
+# Load environment variables from .env file if it exists
+try:
+    from dotenv import load_dotenv
+    env_path = project_root / '.env'
+    if env_path.exists():
+        load_dotenv(dotenv_path=env_path)
+except ImportError:
+    # python-dotenv not installed, continue without it
+    pass
 
 import pandas as _pd
 import numpy as _np
@@ -57,8 +68,10 @@ RR_MACD: float = 2.0           # reward: risk ratio for MACD crossover strategy
 LOOKBACK_CANDLES: int = 200    # number of candles to fetch for indicator calculation
 
 # Telegram notification configuration
-TELEGRAM_BOT_TOKEN: str = "REMOVED_FOR_SECURITY"   # Your Telegram bot token from BotFather
-TELEGRAM_CHAT_ID: str = "REMOVED_FOR_SECURITY"     # Your Telegram chat ID
+# IMPORTANT: Set TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID in .env file
+# SECURITY: Never commit real tokens to Git!
+TELEGRAM_BOT_TOKEN: str = os.getenv("TELEGRAM_BOT_TOKEN", "")
+TELEGRAM_CHAT_ID: str = os.getenv("TELEGRAM_CHAT_ID", "")
 ENABLE_TELEGRAM: bool = True  # Set to True to enable Telegram notifications
 
 
