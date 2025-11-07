@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  atr-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: atr-breakout-bot
+    restart: unless-stopped
+    volumes:
+      # Mount logs and data directories to persist data
+      - ./logs:/app/logs
+      - ./data:/app/data
+      # Mount config.py and .env file for easy configuration updates
+      - ./config.py:/app/config.py:ro
+      - ./.env:/app/.env:ro
+    environment:
+      # You can override config here if needed
+      # Or use environment variables in .env file
+      - TZ=UTC
+    # Keep container running
+    stdin_open: true
+    tty: true
+
